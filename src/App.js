@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import './App.css';
+import { Header } from './components/ui/Header';
+import { Footer } from "./components/ui/Footer";
+import { EventoView } from './components/eventos/EventoView'; 
+import { UsuarioView } from './components/usuarios/UsuarioView'
+import { EquipoView }  from './components/equipos/EquipoView'
+import { UsuarioUpdate } from './components/usuarios/UsuarioUpdate'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header/>
+      <Router>
+            <Switch>
+                <Route exact path="/" component={ EventoView } />
+                <Route exact path="/usuarios" component={ UsuarioView }/>
+                <Route exact path="/equipos" component={ EquipoView }/>
+
+                <Route exact path="/usuario/edit/:usuarioId" component={ UsuarioUpdate }/>
+                <Redirect to='/'/>
+            </Switch>
+        </Router>
+        <Footer/>
+    </>
   );
 }
 
